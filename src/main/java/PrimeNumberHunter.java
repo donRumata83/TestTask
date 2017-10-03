@@ -40,9 +40,15 @@ public class PrimeNumberHunter {
     }
 
     private boolean isNumberPalindrome(long number) {
-        String rightOrder = Long.toString(number);
-        String reverseOrder = new StringBuilder(Long.toString(number)).reverse().toString();
-        return rightOrder.equals(reverseOrder);
+        String numberInString = Long.toString(number);
+        int length = numberInString.length();
+        for (int i = 0; i < length /2; i++) {
+            if (numberInString.charAt(i) != numberInString.charAt(length-i)) return false;
+        }
+        return true;
+        //String rightOrder = Long.toString(number);
+        //String reverseOrder = new StringBuilder(Long.toString(number)).reverse().toString();
+        //return rightOrder.equals(reverseOrder);
     }
 
     private boolean isNumberPrime(long number) {
