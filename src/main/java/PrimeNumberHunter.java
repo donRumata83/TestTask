@@ -43,7 +43,7 @@ public class PrimeNumberHunter {
         String numberInString = Long.toString(number);
         int length = numberInString.length();
         for (int i = 0; i < length /2; i++) {
-            if (numberInString.charAt(i) != numberInString.charAt(length-i)) return false;
+            if (numberInString.charAt(i) != numberInString.charAt(length-1-i)) return false;
         }
         return true;
         //String rightOrder = Long.toString(number);
