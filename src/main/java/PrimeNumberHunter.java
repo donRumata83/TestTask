@@ -5,7 +5,7 @@ import java.util.List;
 public class PrimeNumberHunter {
     private static final long MAX_VALUE = 99999;
     private static final long MIN_VALUE = 10000;
-    private long maxPolindrom = 0;
+    private long maxPalindrome = 0;
     private long firstMultiplier = 0;
     private long secondMultiplier = 0;
     private List<Long> primes;
@@ -20,15 +20,15 @@ public class PrimeNumberHunter {
         for (int i = 0; i < primes.size(); i++) {
             for (int j = i; j < primes.size(); j++) {
                 temp = primes.get(i) * primes.get(j);
-                if (isNumberPolindrome(temp) && maxPolindrom < temp) {
-                    maxPolindrom = temp;
+                if (isNumberPalindrome(temp) && maxPalindrome < temp) {
+                    maxPalindrome = temp;
                     firstMultiplier = primes.get(i);
                     secondMultiplier = primes.get(j);
                     break;
                 }
             }
         }
-        System.out.println(firstMultiplier + " * " + secondMultiplier + " = " + maxPolindrom);
+        System.out.println(firstMultiplier + " * " + secondMultiplier + " = " + maxPalindrome);
     }
 
     private List<Long> getAllPrimes(long from, long to) {
@@ -39,7 +39,7 @@ public class PrimeNumberHunter {
         return result;
     }
 
-    private boolean isNumberPolindrome(long number) {
+    private boolean isNumberPalindrome(long number) {
         String rightOrder = Long.toString(number);
         String reverseOrder = new StringBuilder(Long.toString(number)).reverse().toString();
         return rightOrder.equals(reverseOrder);
