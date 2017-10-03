@@ -38,6 +38,7 @@ public class PrimeNumberHunter {
         }
         return result;
     }
+
     private boolean isNumberPolindrome(long number) {
         String rightOrder = Long.toString(number);
         String reverseOrder = new StringBuilder(Long.toString(number)).reverse().toString();
