@@ -2,38 +2,49 @@
 import org.apache.commons.math3.primes.Primes;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class PrimeNumberHunter {
-    private final long MAX_VALUE = 9999;
-    private final long MIN_VALUE = 1000;
+    private final long MAX_VALUE = 99999;
+    private final long MIN_VALUE = 10000;
     private long maxPolindrom = 0;
     private long firstMultiplier = 0;
     private long secondMultiplier = 0;
+    private List<Long> primes;
 
     public static void main(String[] args) {
         new PrimeNumberHunter().run();
     }
 
     private void run() {
-        for (long i = MAX_VALUE; i > MIN_VALUE; i -= 2) {
-            if (isNumberPrime(i)) {
-                for (long j = i-2; j > MIN_VALUE; j -= 2) {
-                    if (isNumberPrime(j) && isNumberPolindrome(i*j)) {
-                        if (maxPolindrom < i*j) {
-                            maxPolindrom = i*j;
-                            firstMultiplier = i;
-                            secondMultiplier = j;
-                        }
-                    }
+        primes = getAllPrimes(MIN_VALUE, MAX_VALUE);
+        long temp;
+        for (int i = 0; i < primes.size(); i++) {
+            for (int j = i; j < primes.size(); j++) {
+                temp = primes.get(i) * primes.get(j);
+                if (isNumberPolindrome(temp) && maxPolindrom < (temp)) {
+                    maxPolindrom = temp;
+                    firstMultiplier = primes.get(i);
+                    secondMultiplier = primes.get(j);
+                    break;
                 }
             }
         }
-        System.out.println(firstMultiplier + " * "+ secondMultiplier + " = "+ maxPolindrom);
+
+        System.out.println(firstMultiplier + " * " + secondMultiplier + " = " + maxPolindrom);
 
     }
 
 
-
+    private List<Long> getAllPrimes(long from, long to) {
+        List<Long> result = new ArrayList<>();
+        for (long i = to; i > from; i -= 2) {
+            if (isNumberPrime(i)) result.add(i);
+        }
+        return result;
+    }
 
     private boolean isNumberPolindrome(long number) {
         String rightOrder = Long.toString(number);
@@ -42,7 +53,10 @@ public class PrimeNumberHunter {
     }
 
     private boolean isNumberPrime(long number) {
-        return Primes.isPrime((int) number);
 
+        return Primes.isPrime((int) number);
     }
+
+
 }
+
